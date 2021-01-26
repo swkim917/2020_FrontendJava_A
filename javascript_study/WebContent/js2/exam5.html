@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<input type="button" value="방문목록갯수" onclick="func1()">
+	<input type="button" value="뒤로 이동" onclick="func2()">
+	<input type="button" value="앞으로 이동" onclick="func3()">
+	
+
+<script>
+	// window - history : 방문정보 저장
+	//   window 생략가능
+	//      history.속성       length 갯수
+	//      history.메소드()   back() 뒤로가기   forward() 앞으로가기
+	//                         go(-2) 뒤로2번가기  go(2) 앞으로2번가기
+	function func1() {
+		alert('방문목록갯수: ' + history.length);
+	}
+	function func2() {
+		//history.back();
+		history.go(-1);
+		
+		//location.href = 'exam4.html'
+	}
+	function func3() {
+		//history.forward();
+		history.go(1);
+	}
+
+</script>
+</body>
+</html>
+
+

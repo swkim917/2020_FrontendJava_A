@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h1 {
+		color: green;
+	}
+</style>
+</head>
+<body>
+<div id="app">
+	<h1>100</h1>
+	<textarea rows="5" cols="70"></textarea>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	// 키보드 이벤트 종류
+	//   keydown  keypress  keyup  input
+	$('textarea').on('keyup', function () {
+		let str = $(this).val().trim();
+		console.log(str);
+		
+		// 남은글자수
+		let remainLength = 100 - str.length;
+		$('h1').html(remainLength);
+		
+		// 남은글자수가 0 이상이면 'h1' 글자색을 초록색
+		//              0보다 작으면 'h1' 글자색을 빨간색
+		if (remainLength >= 0) {
+			$('h1').css('color', 'green');
+		} else {
+			$('h1').css('color', 'red');
+		}
+	});
+	
+</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>부모창</h1>
+<hr>
+
+<form action="" name="frm">
+	<input type="text" id="id" name="id"><br>
+	<input type="button" value="창열기" onclick="openWindow()">
+	<input type="button" value="창열기2" onclick="openWindow2()">
+	<input type="button" value="창닫기" onclick="window.close()">
+</form>
+
+<script>
+function openWindow() {
+	window.open('exam1.html', 'aaa', 'width=300,height=200,left=100,top=100');
+}
+function openWindow2() {
+	var childWindow = open('exam3.html', 'bbb', 'width=300,height=300');
+	//var txtId = childWindow.document.getElementById('id');
+	// 부모창에서 자식창으로의 접근은 보안문제로 제한되었음
+	// 자식창에서 부모창으로는 접근 가능함.
+	//txtId.value = '호빵맨'; // 보안이슈로 인해 크롬기반에서는 대입 안됨
+}
+
+	// 웹브라우저 객체 (내장객체)
+	// window(브라우저) - location(주소표시줄)
+	//                  - history(뒤로가기,앞으로가기,새로고침)
+	//                  - document(html문서) - html - head
+	//                                              - body
+	
+	// window.멤버변수   window.opener 자기창을 띄운 부모창 참조
+	// window.메소드()   window.open()   self.open()    open() 
+	//                   window.close()  self.close()   close()
+	
+</script>
+</body>
+</html>
+
+
+
+
+

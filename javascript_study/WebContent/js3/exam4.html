@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+	<form action="a.jsp" method="post" name="frm">
+		학년:
+		<select name="grade"><!-- multiple 다중선택 -->
+			<option value="">학년을 선택하세요</option>
+			<option value="1">1학년</option>
+			<option value="2">2학년</option>
+			<option value="3">3학년</option>
+		</select>
+		<br>
+		<input type="button" value="정보확인" onclick="func1()">
+		<input type="button" value="정보확인2" onclick="func2()">
+		<input type="button" value="전송" onclick="func3()">
+	</form>
+</div>
+<script>
+	function func1() {
+		// select 태그요소 기준으로 속성값 확인하기
+		console.log('목록갯수: ' + frm.grade.length); // option 요소 갯수
+		console.log('이름: ' + frm.grade.name); // grade
+		console.log('타입: ' + frm.grade.type); // select-one
+		console.log('선택된 인덱스번호: ' + frm.grade.selectedIndex);
+	}
+	
+	function func2() {
+		// 특정 option 태그요소 기준으로 속성값 확인하기
+		console.log('text: ' + frm.grade.options[1].text);
+		console.log('value: ' + frm.grade.options[1].value);
+		console.log('선택여부: ' + frm.grade.options[1].selected); // true, false
+	}
+	
+	function func3() {
+		// select에서 첫번째 option요소가 선택되면
+		// '학년을 선택하세요' 포커스주기  return
+		if (frm.grade.selectedIndex == 0) {
+			alert('학년을 선택하세요');
+			frm.grade.focus();
+			return;
+		}
+// 		if (frm.grade.options[0].selected == true) {
+// 			alert('학년을 선택하세요');
+// 			frm.grade.focus();
+// 			return;
+// 		}
+		// 전송
+		frm.submit();
+	}
+</script>
+</body>
+</html>
+
+

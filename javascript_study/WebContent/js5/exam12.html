@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+div.a, p {
+	display: none;
+}
+</style>
+</head>
+<body>
+<div id="app">
+	<h1>열기 &amp; 닫기</h1>
+	<div class="a">
+		<h1>제목1</h1>
+		<p>내용1</p>
+	</div>
+	
+	<h1>열기 &amp; 닫기</h1>
+	<div class="a">
+		<h1>제목2</h1>
+		<p>내용2</p>
+	</div>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	// 제이쿼리 간단한 화면효과 함수
+	// show()        hide()      toggle()
+	// slideDown()   slideUp()   slideToggle()
+	// fadeIn()      fadeOut()   fadeToggle()
+	
+	// 제이쿼리에서 현재태그요소 기준으로 다른 태그요소를 탐색하는 함수
+	// next() 형제관계에서 바로 다음요소
+	// prev() 형제관계에서 바로 이전요소
+	// find() 포함하고 있는 자식 또는 자손요소를 찾기
+	// closest() 자신을 포함하고 있는 부모 또는 조상요소를 찾기
+	
+	$('h1').click(function () {
+		$(this).next().slideToggle();
+	});
+</script>
+</body>
+</html>
+
+
+
+

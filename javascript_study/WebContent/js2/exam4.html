@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<input type="button" value="주소정보" onclick="func1();">
+	<input type="button" value="이동" onclick="func2();">
+	<input type="button" value="새로고침" onclick="location.reload();">
+	<input type="button" value="이동2" onclick="location.replace('exam1.html');">
+	
+
+<script>
+	// window - location 웹문서의 주소정보 저장
+	// window 생략가능
+	//   window.location.속성    href  protocol  hostname  port  host
+	//   window.locatoin.메소드()     reload()   replace()
+	function func1() {
+		console.log('주소 : ' + location.href);
+		console.log('프로토콜 : ' + location.protocol);
+		console.log('호스트주소 : ' + location.host);
+	}
+	function func2() {
+		alert('다른 페이지로 이동합니다.');
+		// exam2.html 로 이동
+		location.href = 'exam2.html';
+	}
+	
+
+</script>
+</body>
+</html>
+
+

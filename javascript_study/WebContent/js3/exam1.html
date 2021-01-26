@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+	<form action="a.jsp" method="post" name="frm">
+		<input type="text" name="id" value="aaa"><br>
+		<input type="submit" value="전송">
+		<input type="reset" value="초기화">
+	</form>
+	<br>
+	<input type="button" value="폼정보" onclick="func1()">
+	<input type="button" value="폼정보변경" onclick="func2()">
+</div>
+<script>
+	function func1() {
+		alert(document.forms[0].action);
+		alert(document.frm.method);
+	}
+	function func2() {
+		// action -> b.jsp 변경
+		document.forms[0].action = 'b.jsp';
+		// method -> get 변경
+		document.frm.method = 'get';
+		// form submit
+		document.frm.submit();
+	}
+</script>
+</body>
+</html>
+
+

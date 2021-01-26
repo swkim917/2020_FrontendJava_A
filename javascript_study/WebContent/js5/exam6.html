@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	img {
+		width: 250px;
+		height: 250px;
+	}
+</style>
+</head>
+<body>
+<input type="button" value="시작" id="btnStart">
+<input type="button" value="중지" id="btnStop" disabled>
+<div id="app">
+	<img src="../images/hobbang.jpg">
+	<img src="../images/sikbbang.jpg">
+	<img src="../images/segyun.jpg">
+	<img src="../images/mario.jpg">
+	<img src="../images/kirby.jpg">
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	let intervalId;
+
+	// 시작버튼
+	$('#btnStart').on('click', function () {
+		// setInterval(함수정의, 밀리초)  1초 = 1000밀리초
+		intervalId = setInterval(function () {
+			//$('div#app > img:first').appendTo('div#app');
+			$('div#app > img').first().appendTo('div#app');
+		}, 500);
+		// 시작버튼이 this가 됨
+		$(this).prop('disabled', true);
+		$('#btnStop').prop('disabled', false);
+	});
+	
+	// 중지버튼
+	$('#btnStop').on('click', function () {
+		
+		clearInterval(intervalId);
+		
+		// 중지버튼이 this가 됨
+		$(this).prop('disabled', true);
+		$('#btnStart').prop('disabled', false);
+	});
+	
+</script>
+</body>
+</html>
+
+
+
+

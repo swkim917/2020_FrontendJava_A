@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+	<form action="a.jsp" method="post" name="frm">
+		성별:
+		<input type="radio" name="gender" value="남">남성
+		<input type="radio" name="gender" value="여">여성
+		<br>
+		취미:
+		<input type="checkbox" name="hobby" value="여행">여행
+		<input type="checkbox" name="hobby" value="게임">게임
+		<input type="checkbox" name="hobby" value="야구">야구
+		<br>
+		<input type="button" value="정보" onclick="func1()">
+		<input type="button" value="전송" onclick="func2()">
+	</form>
+</div>
+<script>
+	function func1() {
+		// 라디오버튼, 체크박스는 name속성값의 배열이름으로 관리됨
+		console.log('name: ' + frm.gender[0].name); // gender
+		console.log('type: ' + frm.gender[0].type); // radio
+		console.log('value: ' + frm.gender[0].value);  // 남
+		console.log('checked: ' + frm.gender[0].checked);  // true, false
+	}
+	
+	function func2() {
+		// 성별이 체크 안되어 있으면 '성별 체크하세요' 포커스 return
+		if (frm.gender[0].checked == false 
+				&& frm.gender[1].checked == false) {
+			alert('성별 체크하세요');
+			frm.gender[0].focus();
+			return;
+		}
+		// 취미가 1개이상 체크 안되어 있으면 '취미를 1개이상 체크하세요' 포커스 return
+		if (frm.hobby[0].checked == false
+				&& frm.hobby[1].checked == false
+				&& frm.hobby[2].checked == false) {
+			alert('취미를 1개이상 체크하세요');
+			frm.hobby[0].focus();
+			return;
+		}
+		// 전송
+		frm.submit();
+	}
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+	<h1>회원가입</h1>
+	<hr>
+	<form action="a.jsp" method="post" name="frm">
+		아이디: <input type="text" name="id"><br>
+		패스워드: <input type="password" name="passwd"><br>
+		이름: <input type="text" name="name"><br>
+		성별: <input type="radio" name="gender" value="남">남성
+		      <input type="radio" name="gender" value="여">여성
+		<br>
+		직업:
+		<select name="job">
+			<option value="">직업을 선택하세요</option>
+			<option value="학생">학생</option>
+			<option value="회사원">회사원</option>
+			<option value="기타">기타</option>
+		</select>
+		<br>
+		취미: <input type="checkbox" name="hobby" value="독서">독서
+		      <input type="checkbox" name="hobby" value="게임">게임
+		      <input type="checkbox" name="hobby" value="축구">축구
+		<br>
+		자기소개: <textarea rows="10" cols="50" name="ta"></textarea>
+		<br>
+		<input type="button" value="회원가입" onclick="check()">
+	</form>
+</div>
+<script>
+	function check() {
+		// 아이디 입력 없으면 '아이디를 입력하세요' 포커스 return
+		if (frm.id.value.trim() == '') {
+			alert('아이디를 입력하세요');
+			frm.id.focus();
+			return;
+		}
+		// 패스워드 입력 없으면 '패스워드를 입력하세요' 포커스 return
+		if (frm.passwd.value.trim() == '') {
+			alert('패스워드를 입력하세요');
+			frm.passwd.focus();
+			return;
+		}
+		// 이름 입력 없으면 '이름을 입력하세요' 포커스 return
+		if (frm.name.value.trim() == '') {
+			alert('이름을 입력하세요');
+			frm.name.focus();
+			return;
+		}
+		// 성별 선택 없으면 '성별을 선택하세요' 포커스 return
+		if (frm.gender[0].checked == false
+				&& frm.gender[1].checked == false) {
+			alert('성별을 선택하세요');
+			frm.gender[0].focus();
+			return;
+		}
+		// 직업 선택 없으면 '직업을 선택하세요' 포커스 return
+		if (frm.job.selectedIndex == 0) {
+			alert('직업을 선택하세요');
+			frm.job.focus();
+			return;
+		}
+		// 취미 선택 없으면 '취미를 선택하세요' 포커스 return
+		if (frm.hobby[0].checked == false
+				&& frm.hobby[1].checked == false
+				&& frm.hobby[2].checked == false) {
+			alert('취미를 선택하세요');
+			frm.hobby[0].focus();
+			return;
+		}
+		// 자기소개 입력 없으면 '자기소개를 입력하세요' 포커스 return
+		if (frm.ta.value.trim() == '') {
+			alert('자기소개를 입력하세요');
+			frm.ta.focus();
+			return;
+		}
+		// 전송
+		frm.submit();
+	}
+</script>
+</body>
+</html>
+
+
+

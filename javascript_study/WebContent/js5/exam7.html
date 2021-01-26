@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+</head>
+<body>
+<div id="app">
+	<div>div0</div>
+	<div>div1</div>
+	<div>div2</div>
+	<h1>heading0</h1>
+	<h1>heading1</h1>
+	<h1>heading2</h1>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	$('div').not('div#app').on('click', function (event) {
+		//event.target 이벤트 소스(이벤트가 발생한 대상)
+		// jQuery에서는 event.target이 this가 됨
+		$(this).append('★');
+	});
+	
+	$('h1').on('mouseover', function () {
+		$(this).append('☆');
+	});
+</script>
+</body>
+</html>
+
+
+
+

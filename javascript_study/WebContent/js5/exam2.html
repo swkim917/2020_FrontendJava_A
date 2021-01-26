@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table th, table td {
+		padding: 15px;
+	}
+	table, table th, table td {
+		border: 1px solid black;
+	}
+	table {
+		border-collapse: collapse;
+	}
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼"><br>
+	아이디: <input type="text"><br>
+	패스워드: <input type="password"><br>
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>이름</th>
+				<th>혈액형</th>
+				<th>지역</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>홍길동</td>
+				<td>A</td>
+				<td>부산</td>
+			</tr>
+			<tr>
+				<td>이몽룡</td>
+				<td>B</td>
+				<td>서울</td>
+			</tr>
+			<tr>
+				<td>성춘향</td>
+				<td>O</td>
+				<td>대전</td>
+			</tr>
+			<tr>
+				<td>신사임당</td>
+				<td>AB</td>
+				<td>대구</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	// $('태그명[속성="값"]')     값일치
+	// $('태그명[속성^="값"]')    시작값
+	// $('태그명[속성$="값"]')    끝값
+	// $('태그명[속성~="값"]')    값포함
+	
+	// $('태그명:first')    태그명의 첫번째 요소
+	// $('태그명:last')     태그명의 마지막 요소
+	
+	// $('태그명:odd')      태그명의 홀수번째 요소
+	// $('태그명:even')     태그명의 짝수번째 요소
+	
+	$('input[type="button"]').on('click', function () {
+		//alert('aaa');
+		
+		$('input[type="text"]').val('안녕~~'); // setter
+		let str = $('input[type="text"]').val();  // getter
+		console.log(str);
+		
+		$('tbody > tr:odd').css('background-color', 'yellow');
+		$('tbody > tr:even').css('background-color', 'green');
+		$('tbody > tr:last').css('background-color', 'blue');
+	});
+	
+</script>
+</body>
+</html>
+
+
+
+

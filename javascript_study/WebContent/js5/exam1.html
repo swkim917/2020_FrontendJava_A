@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/* 	* { */
+/* 		color: orange; */
+/* 	} */
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼" id="btn">
+	
+	<h1>제목1</h1>
+	<h1 id="aa">제목2</h1>
+	<h1 class="bb">제목3</h1>
+	<p>본문내용</p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	// 프레임워크와 라이브러리의 차이점
+	// 라이브러리: 우리코드가 직접 사용하는 대상
+	// 프레임워크: 우리코드가 라이브러리에 의해 사용되면 프레임워크로 부름
+	//             프레임워크의 코드규칙대로 사용하게 됨. 
+	
+	// jQuery 프론트엔드 프레임워크
+	
+	// 메소드 체이닝 지원
+	// jQuery('선택자').메소드().메소드().메소드();
+	
+	// 선택자 => 전체 *   태그명   아이디   클래스   선택자
+	
+	//jQuery('*').css('color', 'orange');
+	
+	$('#btn').on('click', function () {
+		$('*').css('color', 'orange');  // 전체 선택자
+		$('h1').css('color', 'red');    // 태그 선택자
+		$('#aa').css('color', 'blue');  // 아이디 선택자
+		$('.bb').css('color', 'green'); // 클래스 선택자
+	});
+	
+// 	document.getElementById('btn').addEventListener('click', function () {
+// 		// 아이디 선택자가 아닌것은 배열로 리턴됨
+// 		// for문 처리가 필요함
+// 		let listH1 = document.querySelectorAll('h1');
+// 		for (let h1 of listH1) {
+// 			h1.style.color = 'red';
+// 		}
+		
+// 		// 아이디 선택자로는 객체 한개만 리턴됨
+// 		let aa = document.querySelector('#aa');
+// 		aa.style.color = 'blue';
+// 	});
+	
+</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+	// 사용자 정의 함수 - 사용자가 직접 정의한 함수
+	function func() {
+		alert('안녕');
+		alert('하세요');
+	}
+	
+	// 내장 함수 - 이미 만들어져 있는 함수
+	
+	// 확인 - true,  취소 - false
+// 	var result = confirm('맞으면 확인 누르고, 틀리면 취소를 눌러주세요');
+// 	if (result) {
+// 		console.log('확인을 눌렀습니다.');
+// 	} else {
+// 		console.log('취소를 눌렀습니다.');
+// 	}
+	
+// 	var name = prompt('이름을 입력하세요', '홍길동');
+// 	console.log('name = ' + name);
+	
+	var num = prompt('숫자를 입력하세요', 0); // 숫자입력받기
+	console.log(typeof num); // string
+// 	if (typeof num == 'string') {
+		
+// 	}
+	
+	// 문자열 안에 숫자만 구성되있는지 문자도 섞여있는지
+	// 내용을 확인해주는 함수가 isNaN()
+	console.log(isNaN(num)); // is Not a Number? -> true/false 리턴함
+	if (isNaN(num)) {
+		alert('문자를 입력하셨네요. 숫자만 입력해주세요.');
+	} else {
+		alert('숫자를 입력하셨네요.');
+		
+		num = parseInt(num); // "10" -> 10     "10.7" -> 10
+		//num = parseFloat(num); // "10.7" -> 10.7
+		console.log(num);
+		console.log(typeof num); // number
+	}
+	
+	
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

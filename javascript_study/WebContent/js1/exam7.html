@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+	// 가장 바깥에 선언된 함수(여기서는 func1())들만 먼저
+	// 스캔해서 메모리에 로딩함
+	var num = 10;
+	
+	func1();
+	
+	function func1() {
+		alert('func1() 호출됨');
+		
+		var num2 = 20;
+		
+		func2();
+		function func2() {
+			alert('func2() 호출됨');
+			
+			var num3 = 30;
+		} // func2()
+	} // func1()
+	
+	
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

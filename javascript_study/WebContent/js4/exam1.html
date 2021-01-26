@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+	// 배열 (가변크기. 자바의 리스트 컬렉션 개념임)
+	var arr = [10, 20, 30];
+	
+	// 객체 (가변크기. 자바의 맵 컬렉션 개념임)
+	var myCar = { 
+		model: '520d',
+		speed: 60,
+		color: 'red',
+		brake: function () {
+			this.speed -= 10;
+		},
+		accel: function () {
+			this.speed += 10;
+		}
+	};
+	
+	myCar.color = 'yellow';
+	myCar.brake();
+	
+	console.log(myCar.color);
+	console.log(myCar.speed);
+	
+	myCar.door = 4;
+	console.log(myCar.door);
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+

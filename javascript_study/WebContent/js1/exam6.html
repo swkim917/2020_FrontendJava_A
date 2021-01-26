@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+	// 자바스크립트는 기본적으로 [함수형 언어]이다.
+	//   객체도 지원하는 언어이다.
+	let a = function () {
+		alert('메시지');
+	};
+	
+	//a();
+	
+	function func(a) {
+		console.log(a);
+		console.log(typeof a);
+		
+		if (typeof a == 'function') {
+			a();
+		}
+	}
+	
+	func(5);
+	func('한글');
+	//func(a);
+	func(function () {
+		alert('메시지2');
+	});
+	
+	// 자바스크립트는 함수정의를 값 취급 가능하므로
+	// 변수에 저장 가능함.
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="app">
+	<form action="a.jsp" method="post" name="frm">
+		아이디: <input type="text" name="id"><br>
+		패스워드: <input type="password" name="passwd"><br>
+		주민번호: <input type="text" name="jumin1" onkeyup="ju1()">
+		        - <input type="text" name="jumin2" onkeyup="ju2()"><br>
+		자기소개: <textarea rows="3" cols="20" name="ta"></textarea>
+		<br>
+		<input type="button" value="버튼" onclick="func1()">
+		<input type="button" value="전송" onclick="func2()">
+	</form>
+</div>
+<script>
+	// 입력 요소(input관련 태그)  
+	//    window.document.frm
+	//    (앞에 생략가능) frm 
+	
+	//    frm.id.속성       type   name   value
+	//    frm.id.메소드()   focus()   blur()   select()
+	function func1() {
+		console.log(frm.id.type);
+		console.log(frm.id.name);
+		console.log(frm.id.value);
+		
+// 		frm.id.focus();  // 포커스 주기
+// 		frm.id.blur();   // 포커스 해제
+// 		frm.id.select(); // value값 선택
+	}
+	
+	function func2() {
+		// 아이디 입력하지 않으면 '입력하세요' 포커스
+		var id = frm.id.value;
+		
+// 		if (id == '') {}
+		if (id.length == 0) {
+			alert('아이디를 입력하세요');
+			frm.id.focus();
+			return; // 함수를 호출한 곳으로 실행흐름이 되돌아감
+		}
+		// 아이디는 4~10글자로 제어
+		if (!(4 <= id.length && id.length <= 10)) {
+			// (4 > id.length || id.length > 10)
+			// (4 <= id.length && id.length <= 10) == false
+			alert('아이디는 4~10 글자 사이로 입력하세요');
+			frm.id.select();
+			return;
+		}
+		
+		// 패스워드 입력값 없으면 '패스워드를 입력하세요' 포커스
+		if (frm.passwd.value.length == 0) {
+			alert('패스워드를 입력하세요');
+			frm.passwd.focus();
+			return;
+		}
+		
+		// 전송 (form태그에 submit 수행)
+		frm.submit();
+	}
+	
+	function ju1() {
+		// jumin1의 value값의 길이가 6자면
+		// 포커스를 jumin2로 이동
+		if (frm.jumin1.value.length == 6) {
+			frm.jumin2.focus();
+		}
+	}
+	function ju2() {
+		// jumin2의 value값 길이가 7자면
+		// name속성이 ta로 포커스 이동
+		if (frm.jumin2.value.length == 7) {
+			frm.ta.focus();
+		}
+	}
+	
+</script>
+</body>
+</html>
+
+
+

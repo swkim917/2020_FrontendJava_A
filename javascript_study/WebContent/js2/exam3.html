@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>열린창</h1>
+	<hr>
+	
+	<form action="" name="frm">
+		<input type="text" id="id" name="id" placeholder="아이디를 입력하세요.">
+		<input type="button" value="확인" onclick="func()">
+	</form>
+
+<script>
+	function func() {
+		//document.getElementById('id');
+		//document.frm.id.value
+		//window.opener.document.frm.id.value = frm.id.value;
+		opener.document.frm.id.value = frm.id.value;
+		close();
+	}
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+	// 생성자 함수 (객체를 생성하는 용도의 함수) 정의
+	function Car(model, speed, color) {
+		// this.멤버변수 또는 메소드명
+		this.model = model;
+		this.speed = speed;
+		this.color = color;
+		this.brake = function () {
+			this.speed -= 10;
+		};
+		this.accel = function () {
+			this.speed += 10;
+		};
+	}
+
+	var myCar = new Car('520d', 60, 'red');
+	
+	// 객체에 멤버변수 추가
+	myCar.turbo = true;
+	
+	// 객체에 메소드 추가
+	// this는 메소드가 추가되는 대상객체 자기자신을 가리킴
+	myCar.showModel = function () {
+		alert('모델은 ' + this.model + '입니다.');
+	};
+
+	myCar.showModel();
+	
+	
+	var myCar2 = new Car('500d', 70, 'blue');
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+

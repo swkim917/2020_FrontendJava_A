@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+	border: 3px solid black;
+	margin: 5px;
+	padding: 5px;
+}
+
+h1 {
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div id="app">
+	<h1>
+		<a href="http://www.naver.com">네이버</a>
+	</h1>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	// a  클릭   css()   background-color  blue
+	$('a').on('click', function (event) {
+		$(this).css('background-color', 'blue');
+		
+		// 현재 태그요소의 기본기능 막기(a태그는 하이퍼링크 기능 막기)
+		//event.preventDefault();
+		
+		// 이벤트 전파 막기 (태그가 포함관계로 겹쳐있을 경우)
+		//event.stopPropagation();
+		
+		return false; // 기본기능과 이벤트전파 모두 막기
+	});
+	// h1 클릭   css()   background-color  red
+	$('h1').on('click', function () {
+		$(this).css('background-color', 'red');
+	});
+</script>
+</body>
+</html>
+
+
+
+
