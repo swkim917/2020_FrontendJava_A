@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<link href="/css/bootstrap.css" rel="stylesheet">
+<link href="/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/css/custom.css" rel="stylesheet">
+<style>
+header {
+	height: 100px;
+	background-color: rgba(125, 211, 242, 0.5);
+	border-radius: 15px;
+	padding: 10px;
+	margin: 10px 0;
+	font-family: 'Nanum Gothic', sans-serif;
+	text-align: center;
+}
+
+footer {
+	font-family: 'Nanum Gothic', sans-serif;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="main.html"> <img src="/images/logo.png"
+					width="200" height="40">
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="list.html">게시판</a></li>
+					<li><a href="#">메뉴2</a></li>
+					<li><a href="#">메뉴3</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">드롭다운 <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">서브메뉴 1</a></li>
+							<li><a href="#">서브메뉴 2</a></li>
+							<li><a href="#">서브메뉴 3</a></li>
+						</ul></li>
+				</ul>
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="검색">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+
+		<header>
+			<h2>부산광역시 구군 정보화교육 정보</h2>
+		</header>
+
+		<div class="row">
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#">메뉴1</a></li>
+					<li><a href="#">메뉴2</a></li>
+					<li><a href="#">메뉴3</a></li>
+					<li><a href="#">메뉴4</a></li>
+				</ul>
+			</div>
+			
+			<div class="col-md-10" id="app">
+				<keep-alive>
+					<my-board-list v-if="listOk" v-on:board-read="boardRead"></my-board-list>
+				</keep-alive>
+				<my-board-read v-if="readOk" v-bind:object="boardInfo" v-on:board-list="boardList"></my-board-read>
+			</div>
+		</div>
+
+		<hr>
+		<footer> 여기는 푸터가 들어가는 곳입니다. </footer>
+
+	</div>
+
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7675cda8ae770ceb746302883e1c9a7"></script>
+	
+	
+	<template id="list-component-template">
+		<div>
+			<h1>글목록 (총 글갯수: {{ totalCount }}, 총 페이지수: {{ pageCount }})</h1>
+			<hr>
+			
+			<div class="form-group">
+				<label class="col-md-offset-6 col-md-4 control-label text-right">글개수: </label>
+				<div class="col-md-2">
+					<select class="form-control" v-model="numOfRows" v-on:change="loadListWithFirstPage">
+						<option v-for="item in [5, 10, 15, 20]">{{ item }}</option>
+					</select>
+				</div>
+			</div>
+			
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>교육과정명</th>
+						<th>교육기간 (교육시간)</th>
+						<th>구군명</th>
+						<th>접수기간</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item, index) in dataList" v-bind:key="index">
+						<td><a href="#" v-on:click="boardRead(item)">{{ item.eduNm }}</a></td>
+						<td>{{ item.eduSdate }} ~ {{ item.eduFdate }} ({{ item.eduTime }})</td>
+						<td>{{ item.gugun }}</td>
+						<td>{{ item.period }}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<button type="button" class="btn btn-primary pull-right">글쓰기</button>
+
+			<ul class="pagination">
+				<li v-bind:class="{ 'disabled': !prev }">
+					<a href="#" v-on:click="setPageNo(prevBlockPage)">« 이전</a>
+				</li>
+				
+				<li v-for="item in pageBlockList" v-bind:class="{ 'active': item.isCurrentPage }">
+					<a href="#" v-on:click="setPageNo(item.pageNum)">{{ item.pageNum }}</a>
+				</li>
+				
+				<li v-bind:class="{ 'disabled': !next }">
+					<a href="#" v-on:click="setPageNo(nextBlockPage)">다음»</a>
+				</li>
+			</ul>
+		</div>
+	</template>
+	<script>
+	var MyBoardList = {
+			template: '#list-component-template',
+			data: function () {
+				return {
+					pageNo: 1,
+					numOfRows: 10,
+					dataList: [],
+					totalCount: 0,
+					pageCount: 0, // 총 페이지 갯수
+					pageBlock: 10,
+					startPage: 0,
+					endPage: 0,
+					prev: false,
+					next: false,
+					pageBlockList: [],
+					isCurrentPage: false
+				}
+			},
+			computed: {
+				prevBlockPage: function () {
+					return this.startPage - this.pageBlock;
+				},
+				nextBlockPage: function () {
+					return this.startPage + this.pageBlock;
+				}
+			},
+			methods: {
+				loadList: function () {
+					var vm = this;
+					var spec = '/eduinfo/pages/' + this.pageNo + '/' + this.numOfRows;
+					
+					axios.get(spec)
+					.then(function (response) {
+						console.log(response);
+						vm.dataList = response.data.getTblIeduScedInfo.item;
+						console.log(vm.dataList);
+						
+						vm.totalCount = response.data.getTblIeduScedInfo.totalCount;
+						
+						vm.makePageBlock();
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+
+// 					$.ajax({
+// 						url: spec,
+// 						success: function (response) {
+// 							console.log(response);
+// 							vm.dataList = response.getTblIeduScedInfo.item;
+// 							console.log(vm.dataList);
+// 						}
+// 					});
+				},
+				makePageBlock: function () {
+					
+					this.pageCount = Math.ceil(this.totalCount / this.numOfRows);
+					
+					// ((1 - 1) / 5) * 5 + 1 -> 1
+					// ((2 - 1) / 5) * 5 + 1 -> 1
+					// ((3 - 1) / 5) * 5 + 1 -> 1
+					// ((4 - 1) / 5) * 5 + 1 -> 1
+					// ((5 - 1) / 5) * 5 + 1 -> 1
+
+					// ((6 - 1) / 5) * 5 + 1 -> 6
+					// ((7 - 1) / 5) * 5 + 1 -> 6
+					// ((8 - 1) / 5) * 5 + 1 -> 6
+					// ((9 - 1) / 5) * 5 + 1 -> 6
+					// ((10- 1) / 5) * 5 + 1 -> 6
+					
+					// 페이지 블록의 시작페이지
+					//this.startPage = (Math.floor(this.pageNo / this.pageBlock) - (this.pageNo % this.pageBlock == 0 ? 1 : 0)) * this.pageBlock + 1;
+					this.startPage = (Math.floor((this.pageNo - 1) / this.pageBlock)) * this.pageBlock + 1;
+					
+					// 페이지 블록의 끝페이지
+					this.endPage = this.startPage + this.pageBlock - 1;
+					if (this.endPage > this.pageCount) {
+						this.endPage = this.pageCount;
+					}
+					
+					this.prev = this.startPage > this.pageBlock;
+					this.next = this.endPage < this.pageCount;
+					
+					this.pageBlockList.splice(0);
+					
+					for (let i=this.startPage; i <= this.endPage; i++) {
+						this.pageBlockList.push({
+							pageNum: i,
+							isCurrentPage: (this.pageNo == i) ? true : false 
+						});
+					}
+					console.log('pageBlockList : ' + this.pageBlockList);
+				},
+				setPageNo: function (pageNum) {
+					if (pageNum < 1 || pageNum > this.pageCount) {
+						return;
+					}
+					this.pageNo = pageNum;
+					this.loadList();
+				},
+				loadListWithFirstPage: function () {
+					this.pageNo = 1;
+					this.loadList();
+				},
+				boardRead: function (info) {
+					this.$emit('board-read', info);
+				}
+			},
+			mounted: function () {
+				this.loadList();
+			}
+	};
+	</script>
+	
+	
+	
+	<template id="read-component-template">
+		<div>
+			<h1>글 상세보기</h1>
+			<hr>
+			
+			<table class="table table-striped">
+				<tr>
+					<th>교육과정명</th>
+					<td>{{ object.eduNm }}</td>
+				</tr>
+				<tr>
+					<th>교육과정설명</th>
+					<td>{{ object.eduExp }}</td>
+				</tr>
+				<tr>
+					<th>접수기간</th>
+					<td>{{ object.period }}</td>
+				</tr>
+				<tr>
+					<th>교육기간</th>
+					<td>{{ object.eduSdate }} ~ {{ object.eduFdate }}</td>
+				</tr>
+				<tr>
+					<th>교육시간</th>
+					<td>{{ object.eduTime }}</td>
+				</tr>
+				<tr>
+					<th>교육대상</th>
+					<td>{{ object.target }}</td>
+				</tr>
+				<tr>
+					<th>교육인원수</th>
+					<td>{{ object.people }}</td>
+				</tr>
+				<tr>
+					<th>교육장소</th>
+					<td>{{ object.eduLoc }}</td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td>{{ object.tel }}</td>
+				</tr>
+				<tr>
+					<th>도로명 주소</th>
+					<td>{{ object.roadAddr }}</td>
+				</tr>
+				<tr>
+					<th>지번 주소</th>
+					<td>{{ object.addr }}</td>
+				</tr>
+				<tr>
+					<th>데이터제공 구군명</th>
+					<td>{{ object.gugun }}</td>
+				</tr>
+				<tr>
+					<th>위도, 경도</th>
+					<td>{{ object.lat }}, {{ object.lng }}</td>
+				</tr>
+			</table>
+			
+			<div id="map" style="width:100%;height:350px;"></div>
+			
+			<button type="button" class="btn btn-primary pull-right" v-on:click="boardList">목록</button>
+		</div>
+	</template>
+	<script>
+	var MyBoardRead = {
+			props: ['object'],
+			template: '#read-component-template',
+			methods: {
+				boardList: function () {
+					this.$emit('board-list');
+				}
+			},
+			mounted: function () {
+				var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+				var mapOption = { 
+		            center: new kakao.maps.LatLng(this.object.lat, this.object.lng), // 지도의 중심좌표
+		            level: 3 // 지도의 확대 레벨
+			    };
+				
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+				// 마커가 표시될 위치입니다 
+				var markerPosition  = new kakao.maps.LatLng(this.object.lat, this.object.lng);
+				
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+				    position: markerPosition
+				});
+				
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+
+				// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+				// marker.setMap(null);  
+			}
+	};
+	</script>
+	
+	
+	
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				listOk: true,
+				readOk: false,
+				boardInfo: {}
+			},
+			components: {
+				'my-board-list': MyBoardList,
+				'my-board-read': MyBoardRead
+			},
+			methods: {
+				boardRead: function (info) {
+					this.boardInfo = info;
+					
+					this.listOk = false;
+					this.readOk = true;
+				},
+				boardList: function () {
+					this.readOk = false;
+					this.listOk = true;
+				}
+			}
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
