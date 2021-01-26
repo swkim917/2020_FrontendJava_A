@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼" id="btn">
+	<ul></ul>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	function process(data) {
+		let str = '';
+		
+		// find()는 전체문서 기준으로 member 태그요소 찾기
+		// member 태그 여러개가 배열리스트로 리턴됨.
+		$(data).find('member').each(function () {
+			// this는 각각의 member태그가 됨
+			let id = $(this).find('id').text();
+			let name = $(this).find('name').text();
+			let age = $(this).find('age').text();
+			
+			str += `<li>${id} : ${name} : ${age}</li>`;
+		});
+		
+		$('ul').html(str);
+		
+	} // process()
+
+	
+	$('#btn').click(function () {
+		
+		$.ajax({
+			url: 'xml2.jsp',
+			success: function (data) {
+				console.log(typeof data); // 태그문서 DOM, Document Object Model
+				console.log(data);
+				
+				process(data);
+			}
+		});
+		
+	});
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼" id="btn">
+	<table border="1">
+		<thead>
+			<tr>
+				<th>이름</th><th>성별</th><th>나이</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	function process(list) {
+		let str = '';
+		
+		$.each(list, function (index, item) {
+			
+// 			str += '<tr>';
+// 			str += '	<td>' + item.name + '</td>';
+// 			str += '	<td>' + item.gender + '</td>';
+// 			str += '	<td>' + item.age + '</td>';
+// 			str += '</tr>';
+			
+			// 백틱(Backtick `)
+			str += `
+				<tr>
+					<td>${item.name}</td>
+					<td>${item.gender}</td>
+					<td>${item.age}</td>
+				</tr>
+			`;
+			
+		});
+		
+		$('tbody').html(str);
+	}
+
+	$('#btn').click(function () {
+		
+		$.ajax({
+			url: 'json2.jsp',
+			success: function (data) {
+				console.log(typeof data);
+				console.log(data);
+				
+				process(data);
+			}
+		});
+		
+	});
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+section {
+	border: 1px solid red;
+}
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼" id="btn">
+	<section></section>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	function process(data) {
+		let str = '';
+		
+		// find()는 전체문서 기준으로 person 태그요소 찾기
+		// person 태그 여러개가 배열리스트로 리턴됨.
+		$(data).find('person').each(function () {
+			// this는 각각의 person태그가 됨
+			let name = $(this).find('name').text();
+			let gender = $(this).find('gender').text();
+			let age = $(this).find('age').text();
+			
+			str += '<h2>' + name + ' : ' + gender + ' : ' + age + '</h2>';
+		});
+		
+		$('section').html(str);
+		
+	} // process()
+
+	
+	$('#btn').click(function () {
+		
+		$.ajax({
+			url: 'xml.jsp',
+			success: function (data) {
+				console.log(typeof data); // 태그문서 DOM, Document Object Model
+				console.log(data);
+				
+				process(data);			
+			}
+		});
+		
+	});
+</script>
+</body>
+</html>
+
+

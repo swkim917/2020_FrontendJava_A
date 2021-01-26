@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+section {
+	border: 1px solid red;
+}
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼" id="btn">
+	<section></section>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	function process(data) {
+		$('section').append('<p>' + data.name + ' : ' + data.gender + ' : ' + data.age + '</p>');
+	}
+
+	$('#btn').click(function () {
+		
+		$.ajax({
+			url: 'json.jsp',
+			success: function (data) {
+				console.log(typeof data);
+				console.log(data);
+				
+				process(data);
+			}
+		});
+		
+	});
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table {
+	width: 300px;
+}
+</style>
+</head>
+<body>
+<div id="app">
+	<fieldset>
+		<legend>검색</legend>
+		<input type="text" name="id" id="id" placeholder="회원ID로 검색">
+		<input type="button" value="검색" id="btn">
+	</fieldset>
+	<br><br>
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>아이디</th><th>이름</th><th>나이</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	function process(item) {
+		let str = '';
+		
+		if (item != null) {
+			// 백틱(Backtick `)
+			str = `
+				<tr>
+					<td>${item.id}</td>
+					<td>${item.name}</td>
+					<td>${item.age}</td>
+				</tr>
+			`;
+		} else { // item == null
+			str = `
+				<tr>
+					<td colspan="3">데이터가 없습니다.</td>
+				</tr>
+			`;
+		}
+		
+		$('tbody').html(str);
+	}
+
+	// 검색버튼을 클릭했을 때
+	$('#btn').click(function () {
+		
+		let id = $('#id').val();
+		// 전송할 데이터를 쿼리 스트링으로 만들기
+		let str = 'id=' + id;
+		
+		// Ajax 함수 호출을 통해
+		// 서버 응답을 가져오기
+		$.ajax({
+			url: 'json5.jsp',
+			data: str,
+			method: 'GET', // method 전송방식 생략시 'GET' 방식으로 동작함 
+			success: function (data) {
+				console.log(typeof data);
+				console.log(data);
+				
+				process(data);
+			}
+		});
+		
+	});
+</script>
+</body>
+</html>
+
+

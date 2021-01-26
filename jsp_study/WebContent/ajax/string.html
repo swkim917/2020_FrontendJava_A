@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+section {
+	border: 1px solid red;
+}
+</style>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="버튼" id="btn">
+	<section></section>
+</div>
+<script src="../js/jquery-3.5.1.js"></script>
+<script>
+	$('#btn').click(function () {
+		// Ajax 통신으로 string.jsp를 요청하고
+		// 응답을 성공적으로 받으면 success 함수 호출함
+		
+		// Ajax(Asynchronous Javascript and XML, JSON)
+		$.ajax({
+			url: 'string.jsp',
+			success: function (data) {
+				console.log(typeof data);
+				console.log(data.trim());
+				
+				$('section').append('<h2>' + data.trim() + '</h2>');
+			}
+		});
+		
+		// 다른 실행문;
+		
+	});
+</script>
+</body>
+</html>
+
+
