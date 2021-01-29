@@ -26,7 +26,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- JSTL 확장 태그 라이브러리 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

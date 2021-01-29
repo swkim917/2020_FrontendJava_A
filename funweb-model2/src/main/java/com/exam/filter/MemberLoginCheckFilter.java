@@ -15,8 +15,6 @@ import javax.servlet.http.HttpSession;
 @WebFilter(urlPatterns = { "/writeForm.do", "/writePro.do", "/fileWriteForm.do", "/fileWritePro.do", "/download.do" })
 public class MemberLoginCheckFilter implements Filter {
 
-	public void init(FilterConfig fConfig) throws ServletException {}
-
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -33,5 +31,7 @@ public class MemberLoginCheckFilter implements Filter {
 		chain.doFilter(request, response);
 	} // doFilter
 
+	public void init(FilterConfig fConfig) throws ServletException {}
+	
 	public void destroy() {}
 }

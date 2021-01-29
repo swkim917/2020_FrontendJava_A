@@ -16,11 +16,6 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/*")
 public class MemberStayLoggedInFilter implements Filter {
 
-	public void init(FilterConfig fConfig) throws ServletException {
-		ServletContext application = fConfig.getServletContext();
-		application.setAttribute("test", "데이터");
-	}
-
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// 요청 사용자의 세션 가져오기
 		HttpServletRequest req = (HttpServletRequest) request;
@@ -45,6 +40,11 @@ public class MemberStayLoggedInFilter implements Filter {
 		// 세션에 로그인 아이디가 이미 있으면 바로 다음 필터를 호출함
 		chain.doFilter(request, response);
 	} // doFilter
-
+	
+	public void init(FilterConfig fConfig) throws ServletException {
+		ServletContext application = fConfig.getServletContext();
+		application.setAttribute("test", "데이터");
+	}
+	
 	public void destroy() {}
 }
