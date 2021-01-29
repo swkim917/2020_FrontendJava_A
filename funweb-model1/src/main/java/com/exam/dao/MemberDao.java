@@ -16,7 +16,7 @@ import com.exam.vo.MemberVo;
 
 public final class MemberDao {
 	
-	// ½Ì±ÛÅæ ÆÐÅÏ ¼³°è
+	// ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private static MemberDao instance = new MemberDao();
 	
 	public static MemberDao getInstance() {
@@ -28,7 +28,7 @@ public final class MemberDao {
 	private MemberDao() {
 	}
 
-	// È¸¿øÁ¤º¸ 1¸í insertÇÏ±â
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ insertï¿½Ï±ï¿½
 	public void addMember(MemberVo memberVo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -56,36 +56,36 @@ public final class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// ¿¹¿Ü ¹ß»ý¿©ºÎ¿¡ °ü°è¾øÀÌ ¹«Á¶°Ç Á¤¸®ÀÛ¾÷ ¼öÇàÇÔ.
-			// tryºí·Ï¿¡¼­ ¸¸µç °´Ã¼¸¦ Á¤¸®ÇÏ´Â ÀÛ¾÷À» ÁÖ·Î ÇÔ
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+			// tryï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½ ï¿½ï¿½
 			JdbcUtils.close(con, pstmt);
 		}
 	} // addMember()
 	
 	
-	// ·Î±×ÀÎ È®ÀÎ.
-	// check -1  ¾ø´Â ¾ÆÀÌµð
-	// check  0  ÆÐ½º¿öµå Æ²¸²
-	// check  1  ¾ÆÀÌµð, ÆÐ½º¿öµå ¸ðµÎ ÀÏÄ¡
+	// ï¿½Î±ï¿½ï¿½ï¿½ È®ï¿½ï¿½.
+	// check -1  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	// check  0  ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ²ï¿½ï¿½
+	// check  1  ï¿½ï¿½ï¿½Ìµï¿½, ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 	public int userCheck(String id, String passwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		
-		int check = -1; // ¾ø´Â ¾ÆÀÌµð »óÅÂ°ªÀ¸·Î ÃÊ±âÈ­
+		int check = -1; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		
 		try {
 			con = JdbcUtils.getConnection();
-			// id¿¡ ÇØ´çÇÏ´Â passwd °¡Á®¿À±â
+			// idï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ passwd ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			sql = "SELECT passwd FROM member WHERE id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			// rs¿¡ ÀúÀå
+			// rsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			rs = pstmt.executeQuery();
-			// rs¿¡ µ¥ÀÌÅÍ(Çà) ÀÖÀ¸¸é
-			//             ÆÐ½º¿öµå ºñ±³  ¸ÂÀ¸¸é  check = 1  Æ²¸®¸é  check = 0
-			// rs¿¡ µ¥ÀÌÅÍ(Çà) ¾øÀ¸¸é   check = -1
+			// rsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			//             ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  check = 1  Æ²ï¿½ï¿½ï¿½ï¿½  check = 0
+			// rsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   check = -1
 			if (rs.next()) {
 				if (passwd.equals(rs.getString("passwd"))) {
 					check = 1;
@@ -106,7 +106,7 @@ public final class MemberDao {
 	
 	
 	
-	// ÀüÃ¼ È¸¿ø¸ñ·Ï °¡Á®¿À±â
+	// ï¿½ï¿½Ã¼ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List<MemberVo> getAllMembers() {
 		List<MemberVo> list = new ArrayList<>();
 		
@@ -145,7 +145,7 @@ public final class MemberDao {
 	} // getAllMembers()
 	
 	
-	// Æ¯Á¤id¿¡ ÇØ´çÇÏ´Â È¸¿ø 1¸í °¡Á®¿À±â
+	// Æ¯ï¿½ï¿½idï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public MemberVo getMemberById(String id) {
 		MemberVo memberVo = null;
 		
@@ -213,7 +213,7 @@ public final class MemberDao {
 	} // getCountById()
 	
 	
-	// Æ¯Á¤id¿¡ ÇØ´çÇÏ´Â È¸¿ø Á¤º¸ ¼öÁ¤ÇÏ±â
+	// Æ¯ï¿½ï¿½idï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public void update(MemberVo memberVo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -240,13 +240,13 @@ public final class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// ¿¹¿Ü ¹ß»ý¿©ºÎ¿¡ °ü°è¾øÀÌ ¹«Á¶°Ç Á¤¸®ÀÛ¾÷ ¼öÇàÇÔ.
-			// tryºí·Ï¿¡¼­ ¸¸µç °´Ã¼¸¦ Á¤¸®ÇÏ´Â ÀÛ¾÷À» ÁÖ·Î ÇÔ
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+			// tryï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½ ï¿½ï¿½
 			JdbcUtils.close(con, pstmt);
 		}
 	} // addMember()
 	
-	// Æ¯Á¤id¿¡ ÇØ´çÇÏ´Â È¸¿ø 1¸í »èÁ¦ÇÏ±â
+	// Æ¯ï¿½ï¿½idï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public void deleteById(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -269,7 +269,7 @@ public final class MemberDao {
 	} // deleteById()
 	
 	
-	// ¸ðµç È¸¿ø »èÁ¦ÇÏ±â
+	// ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public void deleteAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -303,7 +303,7 @@ public final class MemberDao {
 		try {
 			con = JdbcUtils.getConnection();
 			
-			// ³²³à ¼ºº° È¸¿ø¼ö
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½
 			sql  = "SELECT gender, count(*) as cnt ";
 			sql += "FROM member ";
 			sql += "GROUP BY gender ";
@@ -341,13 +341,13 @@ public final class MemberDao {
 		try {
 			con = JdbcUtils.getConnection();
 			
-			// ¿¬·É´ëº° È¸¿ø¼ö
+			// ï¿½ï¿½ï¿½É´ëº° È¸ï¿½ï¿½ï¿½ï¿½
 			sql  = "SELECT CASE  ";
-			sql += "         WHEN age BETWEEN 10 AND 19 THEN '10´ë' ";
-			sql += "         WHEN age BETWEEN 20 AND 39 THEN 'Ã»³âÃþ' ";
-			sql += "         WHEN age BETWEEN 40 AND 59 THEN 'Àå³âÃþ' ";
-			sql += "         WHEN age >= 60 THEN '³ë³âÃþ' ";
-			sql += "         WHEN age < 10 OR age IS NULL THEN '±âÅ¸' ";
+			sql += "         WHEN age BETWEEN 10 AND 19 THEN '10ï¿½ï¿½' ";
+			sql += "         WHEN age BETWEEN 20 AND 39 THEN 'Ã»ï¿½ï¿½ï¿½ï¿½' ";
+			sql += "         WHEN age BETWEEN 40 AND 59 THEN 'ï¿½ï¿½ï¿½ï¿½ï¿½' ";
+			sql += "         WHEN age >= 60 THEN 'ï¿½ï¿½ï¿½ï¿½ï¿½' ";
+			sql += "         WHEN age < 10 OR age IS NULL THEN 'ï¿½ï¿½Å¸' ";
 			sql += "       END as age_range ";
 			sql += "	   , count(*) as cnt ";
 			sql += "FROM member ";
@@ -376,39 +376,39 @@ public final class MemberDao {
 	
 	public static void main(String[] args) {
 		
-		// MemberDao °´Ã¼ ÁØºñ
+		// MemberDao ï¿½ï¿½Ã¼ ï¿½Øºï¿½
 		MemberDao memberDao = new MemberDao();
 		
 		Random random = new Random();
 		
-		memberDao.deleteAll(); // ÀüÃ¼»èÁ¦
+		memberDao.deleteAll(); // ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½
 		
-//		System.out.println("======== insert Å×½ºÆ® =========");
+//		System.out.println("======== insert ï¿½×½ï¿½Æ® =========");
 		
 		for (int i=0; i<1000; i++) {
 			MemberVo memberVo = new MemberVo();
 			memberVo.setId("user"+i);
 			memberVo.setPasswd("1234");
-			memberVo.setName("À¯Àú"+i);
+			memberVo.setName("ï¿½ï¿½ï¿½ï¿½"+i);
 			
-			// ³ªÀÌ°ªÀÇ ¹üÀ§  8¼¼ÀÌ»ó ~ 100¼¼ÀÌÇÏ
+			// ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  8ï¿½ï¿½ï¿½Ì»ï¿½ ~ 100ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			int age = random.nextInt(93) + 8; // (0~92)+8 -> (8~100)
 			memberVo.setAge(age);
 			
-			boolean isMale = random.nextBoolean(); // ³²¼º true ¿©¼º false
+			boolean isMale = random.nextBoolean(); // ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½ false
 			if (isMale) {
-				memberVo.setGender("³²");
+				memberVo.setGender("ï¿½ï¿½");
 			} else {
-				memberVo.setGender("¿©");
+				memberVo.setGender("ï¿½ï¿½");
 			}
 			
 			memberVo.setEmail("user" + i + "@user.com");
 			memberVo.setRegDate(new Timestamp(System.currentTimeMillis()));
-			memberVo.setAddress("ºÎ»ê½Ã");
+			memberVo.setAddress("ï¿½Î»ï¿½ï¿½");
 			memberVo.setTel("010-1234-5678");
 			
 			memberDao.addMember(memberVo);
-//			System.out.println("insert ¼º°ø!");
+//			System.out.println("insert ï¿½ï¿½ï¿½ï¿½!");
 		}
 		
 		List<MemberVo> list = memberDao.getAllMembers();
@@ -416,22 +416,22 @@ public final class MemberDao {
 //			System.out.println(memberVo);
 		}
 		
-//		System.out.println("======== getMemberById Å×½ºÆ® =========");
+//		System.out.println("======== getMemberById ï¿½×½ï¿½Æ® =========");
 		
 		String testId = "user0";
 		
 		MemberVo memberVo = memberDao.getMemberById(testId);
 //		System.out.println(memberVo);
 		
-//		System.out.println("======== update Å×½ºÆ® =========");
+//		System.out.println("======== update ï¿½×½ï¿½Æ® =========");
 		
-		memberVo.setName("ÀÌ¼ø½Å"); // ¼öÁ¤µÉ ÀÌ¸§°ª ¼³Á¤
+		memberVo.setName("ï¿½Ì¼ï¿½ï¿½ï¿½"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		memberDao.update(memberVo);
 		
 		MemberVo getMemberVo = memberDao.getMemberById(testId);
 //		System.out.println(getMemberVo);
 		
-//		System.out.println("======== deleteById Å×½ºÆ® =========");
+//		System.out.println("======== deleteById ï¿½×½ï¿½Æ® =========");
 		
 		memberDao.deleteById(testId);
 		

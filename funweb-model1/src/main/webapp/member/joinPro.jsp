@@ -14,13 +14,11 @@ request.setCharacterEncoding("utf-8");
 <%
 // 가입날짜 생성해서 넣기
 memberVo.setRegDate(new Timestamp(System.currentTimeMillis()));
-
 // DAO 객체 준비
 //MemberDao memberDao = MemberDao.getInstance();
 MemberMyBatisDao memberDao = MemberMyBatisDao.getInstance();
 // 회원가입 메서드 호출
 memberDao.addMember(memberVo);
-
 // 회원가입 성공 후 로그인 페이지로 리다이렉트
 //response.sendRedirect("login.jsp");
 %>

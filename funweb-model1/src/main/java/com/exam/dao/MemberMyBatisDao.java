@@ -26,49 +26,44 @@ public final class MemberMyBatisDao {
 	
 	
 	public MemberVo getMemberById(String id) {
-		MemberVo memberVo = null;
-		
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			memberVo = mapper.getMemberById(id);
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			MemberVo memberVo = memberMapper.getMemberById(id);
+			return memberVo;
 		}
-		return memberVo;
 	}
 	
 	
 	public List<MemberVo> getAllMembers() {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			List<MemberVo> list = mapper.getAllMembers();
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			List<MemberVo> list = memberMapper.getAllMembers();
 			return list;
 		}
 	}
 	
 	
 	
-	// È¸¿øÁ¤º¸ 1¸í insertÇÏ±â
+	
 	public void addMember(MemberVo memberVo) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			mapper.addMember(memberVo);
-			
-//			sqlSession.commit();
-//			sqlSession.rollback();
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			memberMapper.addMember(memberVo);
 		}
 	}
 	
 	
 	
-	// ·Î±×ÀÎ È®ÀÎ.
-	// check -1  ¾ø´Â ¾ÆÀÌµð
-	// check  0  ÆÐ½º¿öµå Æ²¸²
-	// check  1  ¾ÆÀÌµð, ÆÐ½º¿öµå ¸ðµÎ ÀÏÄ¡
+	// ï¿½Î±ï¿½ï¿½ï¿½ È®ï¿½ï¿½.
+	// check -1  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	// check  0  ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ²ï¿½ï¿½
+	// check  1  ï¿½ï¿½ï¿½Ìµï¿½, ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 	public int userCheck(String id, String passwd) {
-		int check = -1; // ¾ø´Â ¾ÆÀÌµð »óÅÂ°ªÀ¸·Î ÃÊ±âÈ­
+		int check = -1; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			String dbPasswd = mapper.userCheck(id);
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			String dbPasswd = memberMapper.userCheck(id);
 			
 			if (dbPasswd != null) {
 				if (passwd.equals(dbPasswd)) {
@@ -86,8 +81,8 @@ public final class MemberMyBatisDao {
 	
 	public int getCountById(String id) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			int count = mapper.getCountById(id);
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			int count = memberMapper.getCountById(id);
 			return count;
 		}
 	}
@@ -95,32 +90,32 @@ public final class MemberMyBatisDao {
 	
 	public void update(MemberVo memberVo) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			mapper.update(memberVo);
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			memberMapper.update(memberVo);
 		}
 	}
 	
 	
 	public void deleteById(String id) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			mapper.deleteById(id);
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			memberMapper.deleteById(id);
 		}
 	}
 	
 	
 	public void deleteAll() {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			mapper.deleteAll();
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			memberMapper.deleteAll();
 		}
 	}
 	
 	
 	public List<Map<String, Object>> getGenderPerCount() {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			List<Map<String, Object>> list = mapper.getGenderPerCount();
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			List<Map<String, Object>> list = memberMapper.getGenderPerCount();
 			return list;
 		}
 	}
@@ -129,8 +124,8 @@ public final class MemberMyBatisDao {
 	
 	public List<Map<String, Object>> getAgeRangePerCount() {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-			List<Map<String, Object>> list = mapper.getAgeRangePerCount();
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			List<Map<String, Object>> list = memberMapper.getAgeRangePerCount();
 			return list;
 		}
 	}

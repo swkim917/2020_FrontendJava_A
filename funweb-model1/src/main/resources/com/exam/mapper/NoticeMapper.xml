@@ -85,7 +85,7 @@
 		where n.num = #{num}
 	</select>
 	<resultMap id="noticeAndAttaches" type="noticeVo">
-		<!-- property 속성은 setter 메소드 이름을 의미함! -->
+		<!-- property 속성은 setter 메소드 이름임. -->
 		<id column="num" property="num"/>
 		<result column="id" property="id"/>
 		<result column="subject" property="subject"/>
@@ -96,7 +96,7 @@
 		<result column="re_ref" property="reRef"/>
 		<result column="re_lev" property="reLev"/>
 		<result column="re_seq" property="reSeq"/>
-		<collection property="attachList" ofType="attachVo" javaType="arraylist">
+		<collection property="attachList" ofType="attachVo" javaType="list">
 			<id column="anum" property="num"/>
 			<result column="filename" property="filename"/>
 			<result column="uploadpath" property="uploadpath"/>

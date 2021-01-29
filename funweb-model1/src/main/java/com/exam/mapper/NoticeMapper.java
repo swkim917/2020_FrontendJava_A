@@ -11,6 +11,16 @@ import com.exam.vo.NoticeVo;
 
 public interface NoticeMapper {
 
+	NoticeVo getNoticeAndAttaches(int num);
+	
+	List<NoticeVo> getNoticesBySearch(
+			@Param("startRow") int startRow, 
+			@Param("pageSize") int pageSize, 
+			@Param("category") String category, 
+			@Param("search") String search);
+	
+	
+	
 //	@Insert("INSERT INTO notice (id, subject, content, readcount, reg_date, ip, re_ref, re_lev, re_seq) "
 //			+ "VALUES (#{id}, #{subject}, #{content}, #{readcount}, #{regDate}, #{ip}, #{reRef}, #{reLev}, #{reSeq})")
 	void addNotice(NoticeVo noticeVo);
@@ -51,17 +61,13 @@ public interface NoticeMapper {
 			@Param("search") String search);
 	
 	
-	List<NoticeVo> getNoticesBySearch(
-			@Param("startRow") int startRow, 
-			@Param("pageSize") int pageSize, 
-			@Param("category") String category, 
-			@Param("search") String search);
+
 	
 	
-	NoticeVo getNoticeAndAttaches(int num);
+
 	
 	
-	// ¸Å°³º¯¼ö Å¸ÀÔÀÌ ÄÃ·º¼ÇÀÏ ¶§´Â @ParamÀ¸·Î ÀÌ¸§À» ¸í½ÃÇØ¾ß ÇÔ!
+	// ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ @Paramï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½!
 	List<NoticeVo> getNoticesByNums(@Param("numList") List<Integer> numList);
 	
 	

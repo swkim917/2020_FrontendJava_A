@@ -29,7 +29,7 @@ public final class NoticeMyBatisDao {
 	}
 	
 	
-	// ÁÖ±Û¾²±â ¸Þ¼­µå
+	// ï¿½Ö±Û¾ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public void addNotice(NoticeVo noticeVo) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
 			NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
@@ -57,7 +57,7 @@ public final class NoticeMyBatisDao {
 	
 	
 	
-	// ÀüÃ¼±Û°¹¼ö °¡Á®¿À±â
+	// ï¿½ï¿½Ã¼ï¿½Û°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getCountAll() {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
 			NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
@@ -97,37 +97,37 @@ public final class NoticeMyBatisDao {
 		}
 	}
 	
-	// ´ä±Û¾²±â ¸Þ¼­µå
+	// ï¿½ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean updateAndAddReply(NoticeVo noticeVo) {
 		SqlSession sqlSession = null;
 		try {
-			// Æ®·£Àè¼Ç ´ÜÀ§·Î Ã³¸®ÇÏ±â À§ÇØ¼­ ¼öµ¿Ä¿¹ÔÀ¸·Î ¼³Á¤ÇÔ
-			sqlSession = sqlSessionFactory.openSession(false); // false¸é ¼öµ¿Ä¿¹Ô
+			// Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			sqlSession = sqlSessionFactory.openSession(false); // falseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 			NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
 			
-			// ´ä±Û insert ÇÏ±â Àü¿¡ °°Àº ±Û±×·ì ³»ÀÇ ¼ø¹ø ¼öÁ¤ÇÏ±â
+			// ï¿½ï¿½ï¿½ insert ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 			mapper.updateReSeq(noticeVo.getReRef(), noticeVo.getReSeq());
 			
-			// ´ä±Û¿¡ ¾Ë¸ÂÀº °ªÀ¸·Î VO¸¦ ¼öÁ¤
+			// ï¿½ï¿½Û¿ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ VOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			noticeVo.setReLev(noticeVo.getReLev() + 1);
 			noticeVo.setReSeq(noticeVo.getReSeq() + 1);
 			
-			// ´ä±Û insert ÇÏ±â
+			// ï¿½ï¿½ï¿½ insert ï¿½Ï±ï¿½
 			mapper.addNotice(noticeVo);
 			
-			sqlSession.commit(); // Ä¿¹ÔÇÏ±â
+			sqlSession.commit(); // Ä¿ï¿½ï¿½ï¿½Ï±ï¿½
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			sqlSession.rollback(); // ·Ñ¹éÇÏ±â
+			sqlSession.rollback(); // ï¿½Ñ¹ï¿½ï¿½Ï±ï¿½
 			return false;
 		} finally {
-			sqlSession.close(); // sqlSession ´Ý±â
+			sqlSession.close(); // sqlSession ï¿½Ý±ï¿½
 		}
 	}
 	
 	
-	// °Ë»ö¾î¸¦ Àû¿ëÇÑ ±Û°¹¼ö °¡Á®¿À±â
+	// ï¿½Ë»ï¿½ï¿½î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getCountBySearch(String category, String search) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
 			NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
@@ -138,13 +138,13 @@ public final class NoticeMyBatisDao {
 	
 	public List<NoticeVo> getNoticesBySearch(int startRow, int pageSize, String category, String search) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
-			NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
-			return mapper.getNoticesBySearch(startRow, pageSize, category, search);
+			NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+			return noticeMapper.getNoticesBySearch(startRow, pageSize, category, search);
 		}
 	}
 	
 	
-	// notice Å×ÀÌºí°ú attach Å×ÀÌºí ¿ÞÂÊ ¿ÜºÎÁ¶ÀÎÇØ¼­ °¡Á®¿À±â
+	
 	public NoticeVo getNoticeAndAttaches(int num) {
 		try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
 			NoticeMapper mapper = sqlSession.getMapper(NoticeMapper.class);
