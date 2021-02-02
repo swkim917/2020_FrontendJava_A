@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div id="target"></div>
+
+<script>
+	function showLocation(position) {
+		
+		let lat = position.coords.latitude;   // 위도
+		let lng = position.coords.longitude;  // 경도
+		
+		let msg = '위도: ' + lat + ', 경도: ' + lng + '<br>';
+		document.getElementById('target').innerHTML = msg;
+	} // showLocation
+	
+	function errorHandler(error) {
+		let msg = '';
+		
+		switch (error.code) {
+		case error.PERMISSION_DENIED:
+			msg = '사용자 거부';
+			break;
+		case error.POSITION_UNAVAILABLE:
+			msg = '지리 정보를 얻을수 없음';
+			break;
+		case error.TIMEOUT:
+			msg = '시간 초과';
+			break;
+		case error.UNKNOWN_ERROR:
+			msg = '알수없는 오류 발생';
+			break;
+		}
+		document.getElementById('target').innerHTML = msg;
+	} // errorHandler
+
+	// 사용자 위치정보를 가져올수 있는 객체
+	let geolocation = navigator.geolocation;
+	
+	// 현재 위치 가져오기
+	geolocation.getCurrentPosition(showLocation, errorHandler);
+
+	// ...
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
