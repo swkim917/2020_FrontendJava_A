@@ -1,3 +1,4 @@
+<%@page import="org.mindrot.jbcrypt.BCrypt"%>
 <%@page import="com.exam.dao.MemberMyBatisDao"%>
 <%@page import="com.exam.dao.MemberDao"%>
 <%@page import="java.sql.Timestamp"%>
@@ -12,6 +13,11 @@ request.setCharacterEncoding("utf-8");
 <%-- 액션태그로 VO객체에 파라미터값 저장 --%>
 <jsp:setProperty property="*" name="memberVo" />
 <%
+// 사용자 입력 패스워드를 암호화된 문자열로 변경
+String passwd = memberVo.getPasswd();
+String hashedPwd = BCrypt.hashpw(passwd, BCrypt.gensalt());
+memberVo.setPasswd(hashedPwd);
+
 // 가입날짜 생성해서 넣기
 memberVo.setRegDate(new Timestamp(System.currentTimeMillis()));
 // DAO 객체 준비
