@@ -91,8 +91,12 @@ div#chatbox {
 				this.scrollDown();
 			},
 			disconnect: function () {
+				if (webSocket == null) {
+					return;
+				}
 				webSocket.send(this.nickname + '님이 퇴장하셨습니다.');
 				webSocket.close();
+				webSocket = null;
 			},
 			send: function () {
 				if (this.message == '') {

@@ -145,6 +145,10 @@ div#chatbox div.others {
 				this.scrollDown();
 			},
 			disconnect: function () {
+				if (webSocket == null) {
+					return;
+				}
+				
 				let obj = {
 						type: 'LEAVE',
 						roomId: roomId,
@@ -153,6 +157,7 @@ div#chatbox div.others {
 				let str = JSON.stringify(obj);
 				webSocket.send(str);
 				webSocket.close();
+				webSocket = null;
 			},
 			send: function () {
 				if (this.message == '') {
